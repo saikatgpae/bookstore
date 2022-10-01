@@ -1,0 +1,44 @@
+.navber {
+  display: flex;
+
+  /* margin: 1.813rem 0 1.813rem 6.25rem; */
+  padding-top: 1.813rem;
+  padding-bottom: 1.813rem;
+  background-color: white;
+  padding-left: 6.25rem;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2.563rem;
+  margin: 0;
+  padding-left: 2.938rem;
+
+  /* background-color: white; */
+}
+
+.nav-menu li {
+  list-style-type: none;
+  margin: 0;
+  text-decoration: none;
+
+  /* background-color: white; */
+}
+
+h1 {
+  font-size: 1.875rem;
+  margin: 0;
+}
+
+.books,
+.categories {
+  color: black;
+  text-decoration: none;
+}
+
+.categories {
+  cursor: not-allowed;
+  opacity: 0.5;
+
+  /* pointer-events: none; */
+}
