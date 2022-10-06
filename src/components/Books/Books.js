@@ -1,38 +1,15 @@
-import React, { useState } from 'react';
-// import uuid from 'react-uuid';
-import { v4 as uuidv4 } from 'uuid';
-// import AddBook from '../AddBook/AddBook';
+import { useSelector } from 'react-redux';
 import Book from '../Book/Book';
 import './Books.css';
 
 function BookList() {
-  const Books = [
-    {
-      title: 'The Hunger Games',
-      author: 'Suzzane Collins',
-      category: 'Action',
-      id: uuidv4(),
-    },
-    {
-      title: 'Dune',
-      author: 'Frank Herbert',
-      category: 'Science Fiction',
-      id: uuidv4(),
-    },
-    {
-      title: 'Capital in the Twenty-First Century',
-      author: 'Suzzane Collins',
-      category: 'Economy',
-      id: uuidv4(),
-    },
-  ];
-  const [books] = useState(Books);
+  const books = useSelector((state) => state.books);
   return (
     <div>
       <ul className="book-information">
         {books.map((book) => (
           <li key={book.id} className="book" style={{ listStyleType: 'none' }}>
-            <Book category={book.category} title={book.title} author={book.author} />
+            <Book categeory={book.categeory} title={book.title} author={book.author} id={book.id} />
           </li>
         ))}
       </ul>

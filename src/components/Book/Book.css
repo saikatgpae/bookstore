@@ -61,9 +61,11 @@
   padding: 0 10px 0 0;
 }
 
-.comments,
 .remove,
+.comments,
 .edit {
+  border: none;
+  background-color: white;
   height: 1.188rem;
   font-size: 0.875rem;
   font-weight: 300;
@@ -72,16 +74,11 @@
   line-height: normal;
   letter-spacing: normal;
   color: #4386bf;
-  padding: 0 15px 0 15px;
+  padding-top: 0;
 }
 
 .comments {
-  padding: 0 15px 0 0;
-}
-
-.remove {
-  border-right: 2px solid rgb(171, 167, 167);
-  border-left: 2px solid rgb(171, 167, 167);
+  padding-left: 0;
 }
 
 .dot {
