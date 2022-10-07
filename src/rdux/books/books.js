@@ -22,6 +22,14 @@ const initialState = [{
   id: uuidv4(),
 }];
 
+eslint di
+const API = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/ehEXJIZOdMZTzHuhOZWq/books';
+export const fetchBookThunk = createAsyncThunk(FETCH_BOOK, (action) => {
+  const dispatch = action;
+  fetch(API).then((response) => response.json()).then((data) => {console.log(data);})})
+
+
+
 export default function reduceBook(state = initialState, action) {
   switch (action.type) {
     case ADD_BOOK: return [
