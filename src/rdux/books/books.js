@@ -1,54 +1,79 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const ADD_BOOK = 'bookstore/books/ADD_BOOK';
 export const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
+export const FETCH_BOOK = 'FETCH_BOOK';
 
-const initialState = [{
-  title: 'The Hunger Games',
-  author: 'Suzzane Collins',
-  categeory: 'Action',
-  id: uuidv4(),
-},
-{
-  title: 'Dune',
-  author: 'Frank Herbert',
-  categeory: 'Science Fiction',
-  id: uuidv4(),
-},
-{
-  title: 'Capital',
-  author: 'Suzzane Collins',
-  categeory: 'Economy',
-  id: uuidv4(),
-}];
+const initialState = [];
+const API = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/sKNpRc0IVeG7xRIpiN7S/books';
+
+export const fetchBook = (payload) => ({
+  type: FETCH_BOOK,
+  payload,
+});
+
+export const fetchAllBookThunk = createAsyncThunk(FETCH_BOOK, (action) => {
+  const dispatch = action;
+  fetch(API).then((response) => response.json()).then((data) => {
+    const books = Object.keys(data).map((key) => {
+      const book = data[key][0];
+      return {
+        item_id: key,
+        ...book,
+      };
+    });
+    dispatch({
+      type: FETCH_BOOK,
+      payload: books,
+    });
+  });
+});
+
+export const addBook = (payload) => ({
+  type: ADD_BOOK,
+  payload,
+});
+
+export const addBookThunk = createAsyncThunk(ADD_BOOK, (action) => (async () => {
+  const { payload, dispatch } = action;
+  await fetch(API, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  dispatch(addBook(payload));
+})());
+
+export const removeBook = (payload) => ({
+  type: REMOVE_BOOK,
+  payload,
+});
+
+export const removeBookThunk = createAsyncThunk(REMOVE_BOOK, (action) => (async () => {
+  const { payload, dispatch } = action;
+  await fetch(`${API}/${payload.item_id}`, {
+    method: 'DELETE',
+  });
+  dispatch(removeBook(payload));
+})());
 
 export default function reduceBook(state = initialState, action) {
   switch (action.type) {
     case ADD_BOOK: return [
-      ...state, {
-        id: uuidv4(),
-        title: action.title,
-        author: action.author,
-        categeory: action.categeory,
-        completed: false,
-      },
+      ...state,
+      action.payload,
     ];
 
+    case FETCH_BOOK:
+      return [
+        ...state,
+        ...action.payload,
+      ];
+
     case REMOVE_BOOK:
-      return state.filter((book) => book.id !== action.id);
+      return [...state.filter((book) => book.item_id !== action.payload.item_id),
+      ];
     default: return state;
   }
 }
-
-export const addNewBook = (book) => ({
-  type: ADD_BOOK,
-  id: uuidv4(),
-  title: book.title,
-  author: book.author,
-  categeory: book.categeory,
-});
-
-export const removeBook = (id) => ({
-  type: REMOVE_BOOK,
-  id,
-});

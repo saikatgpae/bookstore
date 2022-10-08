@@ -1,24 +1,24 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addNewBook } from '../../rdux/books/books';
+import { addBookThunk } from '../../rdux/books/books';
 import './AddNewBook.css';
 
 function AddNewBook() {
   const dispatch = useDispatch();
   const [author, setAuthor] = useState('');
   const [title, setTitle] = useState('');
-  const [categeory, setCategeory] = useState('');
+  const [category, setCategeory] = useState('');
 
   const handleClick = (e) => {
     e.preventDefault();
     const book = {
-      id: uuidv4(),
+      item_id: uuidv4(),
       title,
       author,
-      categeory,
+      category,
     };
-    dispatch(addNewBook(book));
+    dispatch(addBookThunk({ payload: book, dispatch }));
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
     document.querySelector('#categeory').value = 'categeory';
