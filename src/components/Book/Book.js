@@ -33,7 +33,7 @@ function Book(props) {
         </div>
       </div>
       <div className="completed">
-        <h5 className="completed-yet">100%</h5>
+        <h5 className="completed-yet">75%</h5>
         <h5 className="completed">Completed</h5>
       </div>
       <div>

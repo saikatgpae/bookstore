@@ -86,7 +86,10 @@
   width: 4.25rem;
   border-radius: 50%;
   display: inline-block;
-  border: 4px solid #0290ff;
+  border: 4px solid #edeff1;
+  border-bottom-color: #17b0f6;
+  border-right-color: #17b0f6;
+  border-top-color: #17b0f6;
 }
 
 .Rectangle-3 {
