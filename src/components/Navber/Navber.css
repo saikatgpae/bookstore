@@ -37,7 +37,7 @@ h1 {
 }
 
 .user-login {
-  color: #0290ff; 
+  color: #0290ff;
 }
 
 .login-circle {
@@ -45,6 +45,6 @@ h1 {
   border-radius: 50%;
   width: 2.813rem;
   height: 2.813rem;
-  padding-top: .25rem;
+  padding-top: 0.25rem;
   margin-left: auto;
 }
