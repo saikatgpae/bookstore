@@ -1,28 +1,29 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { removeBook } from '../../rdux/books/books';
+import { removeBookThunk } from '../../rdux/books/books';
 import './Book.css';
-
+// /* eslint-disable */
 function Book(props) {
   const {
-    categeory, title, author, id,
+    category, title, author, itemId,
   } = props;
+
   const dispatch = useDispatch();
 
-  const handleClick = () => {
-    dispatch(removeBook(id));
+  const handleClick = (obj) => {
+    dispatch(removeBookThunk({ payload: obj, dispatch }));
   };
 
   return (
     <div className="book-detail">
       <div className="book-card">
-        <h4 className="category">{categeory}</h4>
+        <h4 className="category">{category}</h4>
         <h2 className="title">{title}</h2>
         <h4 className="author">{author}</h4>
         <ul className="user">
           <li><button className="comments" type="submit">Comments</button></li>
-          <li><button className="remove" type="submit" onClick={handleClick}>Remove</button></li>
+          <li><button className="remove" type="submit" onClick={() => { handleClick({ item_id: itemId }); }}>Remove</button></li>
           <li><button className="edit" type="submit">Edit</button></li>
         </ul>
       </div>
@@ -45,15 +46,12 @@ function Book(props) {
     </div>
   );
 }
-// Book.defaultProps = {
-//   categeory: 'Action',
-// };
 
 Book.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  categeory: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  itemId: PropTypes.string.isRequired,
 };
 
 export default Book;

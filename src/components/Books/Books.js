@@ -8,8 +8,13 @@ function BookList() {
     <div>
       <ul className="book-information">
         {books.map((book) => (
-          <li key={book.id} className="book" style={{ listStyleType: 'none' }}>
-            <Book categeory={book.categeory} title={book.title} author={book.author} id={book.id} />
+          <li key={book.item_id} className="book" style={{ listStyleType: 'none' }}>
+            <Book
+              category={book.category}
+              title={book.title}
+              author={book.author}
+              itemId={book.item_id}
+            />
           </li>
         ))}
       </ul>
